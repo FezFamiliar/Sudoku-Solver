@@ -32,19 +32,18 @@ void init(int grid[n][n]){
 	int filled, fill_value, fill_place_i, fill_place_j;
 
 	srand(time(0));
-	filled = 1 + rand() % (n - 2);
+
 
 	int* random_cask = (int*)malloc(n*sizeof(int));
 
 	for(size_t i = 0;i < n;i++) random_cask[i] = i + 1;
-
-	//Shuffle(random_cask);
 
 
 	for(int i = 0;i < n;i+=3){
 		for(int j = 0;j < n;j+=3){
 
 			Shuffle(random_cask);
+			filled = 1 + rand() % (n - 2);
 			for(int k = 0;k < filled;k++){
 
 				fill_place_i = i + rand() % 3;
@@ -56,7 +55,7 @@ void init(int grid[n][n]){
 		}
 	}
 
-	print_grid(grid);
+	//print_grid(grid);
 	free(random_cask);
 }
 
