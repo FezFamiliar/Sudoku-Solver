@@ -43,7 +43,7 @@ void init(int grid[n][n]){
 		for(int j = 0;j < n;j+=3){
 
 			Shuffle(random_cask);
-			filled = 1 + rand() % (n - 2);
+			filled = 2 + rand() % (n - 2);
 			for(int k = 0;k < filled;k++){
 
 				fill_place_i = i + rand() % 3;
@@ -55,7 +55,7 @@ void init(int grid[n][n]){
 		}
 	}
 
-	//print_grid(grid);
+	print_grid(grid);
 	free(random_cask);
 }
 
