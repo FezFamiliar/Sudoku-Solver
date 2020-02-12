@@ -31,6 +31,11 @@ void init(int grid[n][n]){
 
 	int filled, fill_value, fill_place_i, fill_place_j;
 
+	for(size_t i = 0;i < n;i++)
+		for(size_t j = 0;j < n;j++)
+			grid[i][j] = 0;
+
+
 	srand(time(0));
 
 
@@ -63,12 +68,7 @@ void init(int grid[n][n]){
 int main(){
 
 	int grid[n][n];
-	for(size_t i = 0;i < n;i++)
-		for(size_t j = 0;j < n;j++)
-			grid[i][j] = 0;
 
-
-	//print_grid(grid);
 	init(grid);
 	return 0;
 }
