@@ -16,12 +16,39 @@ void print_grid(int grid[n][n]){
 }
 
 
-void init(){
+void init(int grid[n][n]){
 
-
+	int filled, fill_value, fill_place_i, fill_place_j, aux;
+	aux = 0;
 	srand(time(0));
-	int c = rand() % (n + 1);
-	printf("%d\n",c);
+	filled = 1 + rand() % (n - 2);
+
+	int* duplicate = (int*)malloc(filled*sizeof(int));
+	while(filled-- > 0){
+
+		fill_place_i = rand() % 3;
+		fill_place_j = rand() % 3;
+		fill_value = 1 + rand() % n;
+
+		for(size_t i = 0;i < aux;i++){
+			if(duplicate[i] == fill_value){
+				do{
+
+				fill_value = 1 + rand() % n;
+				}while(fill_value != duplicate[i]);
+
+
+			}
+		}
+
+		duplicate[aux++] = fill_value;
+
+		grid[fill_place_i][fill_place_j] = fill_value;
+	}
+
+
+	print_grid(grid);
+
 }
 
 
@@ -34,6 +61,6 @@ int main(){
 
 
 	//print_grid(grid);
-	init();
+	init(grid);
 	return 0;
 }
