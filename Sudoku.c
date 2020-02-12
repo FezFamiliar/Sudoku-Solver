@@ -8,9 +8,9 @@ const int n = 9;
 void print_grid(int grid[n][n]){
 
 	for(size_t i = 0;i < n;i++){
-		for(size_t j = 0;j < n;j++){
+		for(size_t j = 0;j < n;j++)
 			printf("%d ",grid[i][j]);
-		}
+
 		printf("\n");
 	}
 }
@@ -29,8 +29,7 @@ void Shuffle(int* random_cask){
 
 void init(int grid[n][n]){
 
-	int filled, fill_value, fill_place_i, fill_place_j, aux;
-	aux = 0;
+	int filled, fill_value, fill_place_i, fill_place_j;
 
 	srand(time(0));
 	filled = 1 + rand() % (n - 2);
@@ -39,25 +38,26 @@ void init(int grid[n][n]){
 
 	for(size_t i = 0;i < n;i++) random_cask[i] = i + 1;
 
-	Shuffle(random_cask);
+	//Shuffle(random_cask);
 
 
-	/*for(size_t i = 0;i < n;i++) printf("%d ",random_cask[i]);
+	for(int i = 0;i < n;i+=3){
+		for(int j = 0;j < n;j+=3){
 
-	exit(1);*/
+			Shuffle(random_cask);
+			for(int k = 0;k < filled;k++){
 
-	while(filled-- > 0){
-
-		fill_place_i = rand() % 3;
-		fill_place_j = rand() % 3;
+				fill_place_i = i + rand() % 3;
+				fill_place_j = j + rand() % 3;
 
 
-		grid[fill_place_i][fill_place_j] = random_cask[aux++];
+				grid[fill_place_i][fill_place_j] = random_cask[k++];
+			}
+		}
 	}
 
-
 	print_grid(grid);
-
+	free(random_cask);
 }
 
 
