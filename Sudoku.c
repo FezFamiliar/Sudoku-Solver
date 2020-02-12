@@ -1,4 +1,6 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 
 const int n = 9;
 
@@ -13,6 +15,16 @@ void print_grid(int grid[n][n]){
 	}
 }
 
+
+void init(){
+
+
+	srand(time(0));
+	int c = rand() % (n + 1);
+	printf("%d\n",c);
+}
+
+
 int main(){
 
 	int grid[n][n];
@@ -21,6 +33,7 @@ int main(){
 			grid[i][j] = 0;
 
 
-	print_grid(grid);
+	//print_grid(grid);
+	init();
 	return 0;
 }
