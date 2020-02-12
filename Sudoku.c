@@ -65,10 +65,32 @@ void init(int grid[n][n]){
 }
 
 
+void SolveMe(){
+
+
+	if(){
+
+
+	}
+	else{
+
+		for(;;){
+		
+		SolveMe(k + 1);
+
+		}
+
+
+	}
+
+}
+
+
+
 int main(){
 
 	int grid[n][n];
-
 	init(grid);
+
 	return 0;
 }
