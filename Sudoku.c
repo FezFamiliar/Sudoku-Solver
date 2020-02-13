@@ -4,12 +4,97 @@
 
 const int n = 9;
 
+int IsValid(int row, int col, int target,int grid[n][n]){
+
+	int aux_row_length = 0;
+	int aux_col_length = 0;
+	size_t i, j;
+	for(size_t x = 0;x < n;x++) // check row
+		if(grid[row][x] == target) return 0;
+
+	for(size_t y = 0;y < n;y++) // check column
+		if(grid[y][col] == target) return 0;
+
+
+	//check box
+
+	if(row < 3 && col < 3){
+
+		i = 0;
+		j = 0;
+
+	}
+	if(row < 3 && col >= 3 && col < 6){
+
+ 		i = 0;
+		j = 3;
+
+	}
+	if(row < 3 && col >= 6 && col < 9){
+
+		i = 0;
+		j = 6;
+
+	}
+	if(row >= 3 && row < 6 && col < 3){
+
+		i = 3;
+		j = 0;
+
+	}
+	if(row >= 3 && row < 6 && col >= 3 && col < 6){
+
+		i = 3;
+		j = 3;
+
+	}
+	if(row >= 3 && row < 6 && col >= 6 && col < 9){
+
+		i = 3;
+		j = 6;
+
+	}
+	if(row >= 6 && col < 3){
+		i = 6;
+		j = 0;
+
+	}
+	if(row >= 6 && col >= 3 && col < 6){
+
+		i = 6;
+		j = 3;
+	}
+	if(row >= 6 && col >= 6){
+
+		i = 6;
+		j = 6;
+
+	}
+
+	aux_row_length = i + 3;
+	aux_col_length = j + 3;
+
+	for(size_t _i = i;_i < aux_row_length;_i++)
+		for(size_t _j = j;_j < aux_col_length;_j++)
+			if(grid[_i][_j] == target)   return 0;
+
+
+
+	return 1;
+}
+
+int IsEmpty(int row, int col, int grid[n][n]){
+
+
+	return (grid[row][col] == 0) ? 1 : 0;
+
+}
 
 void print_grid(int grid[n][n]){
 
 	for(size_t i = 0;i < n;i++){
 		for(size_t j = 0;j < n;j++){
-	
+
 			printf(" %d ",grid[i][j]);
 			if(j == 2 || j == 5) printf("|");
 			}
@@ -69,11 +154,57 @@ void init(int grid[n][n]){
 	free(random_cask);
 }
 
+int IsFull(int grid[n][n]){
 
+	for(size_t i = 0;i < n;i++)
+		for(size_t j = 0;j < n;j++)
+			if(grid[i][j] == 0) return 0;
+
+
+	return 1;
+}
+
+int Recurse(int row, int col, int grid[n][n]){
+
+
+	if(IsFull(grid)) {
+		print_grid(grid);
+		exit(1);
+	}
+	else{
+
+
+		for(size_t t = 1;t <= n;t++){
+			if(IsValid(row,col,t,grid) && IsEmpty(col,row,grid) && row >= 0 && row < n && col >= 0 && col < n){
+				grid[row][col] = t;
+				printf("ff");
+				Recurse(row, col + 1, grid);
+				Recurse(row + 1, col, grid);
+				Recurse(row, col - 1, grid);
+				Recurse(row - 1, col, grid);
+				grid[row][col] = 0; // if you need to backtrack
+			}
+		}
+
+
+	}
+}
 int main(){
 
-	int grid[n][n];
+	int grid[9][9] = {
+	0,0,0,0,0,0,0,0,0,
+	0,0,0,0,0,0,0,0,0,
+	0,0,0,0,0,0,0,0,0,
+	0,0,0,0,0,0,0,0,0,
+	0,0,0,0,0,0,0,0,0,
+	0,0,0,0,0,0,0,0,0,
+	0,0,0,0,0,0,0,0,0,
+	0,0,0,0,0,0,0,0,0,
+	0,0,0,0,0,0,0,0,0
 
-	init(grid);
+	};
+
+	Recurse(0,0,grid);
+
 	return 0;
 }
