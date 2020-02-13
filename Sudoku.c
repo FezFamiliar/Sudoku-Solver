@@ -8,10 +8,15 @@ const int n = 9;
 void print_grid(int grid[n][n]){
 
 	for(size_t i = 0;i < n;i++){
-		for(size_t j = 0;j < n;j++)
-			printf("%d ",grid[i][j]);
+		for(size_t j = 0;j < n;j++){
+	
+			printf(" %d ",grid[i][j]);
+			if(j == 2 || j == 5) printf("|");
+			}
+
 
 		printf("\n");
+		if(i == 2 || i == 5) printf("----------------------------\n");
 	}
 }
 void Shuffle(int* random_cask){
