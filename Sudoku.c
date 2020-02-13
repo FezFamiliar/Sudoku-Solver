@@ -164,30 +164,33 @@ int IsFull(int grid[n][n]){
 	return 1;
 }
 
-void Recurse(int row, int col, int grid[n][n]){
+int Recurse(int row, int col, int grid[n][n]){
 
 
-	if(row >= 0 && row < n && col >= 0 && col < n){
+	if(IsFull(grid)) {
+		print_grid(grid);
+		exit(1);
+	}
+	else{
 
 		if(IsEmpty(row,col,grid)){
-			for(size_t t = 1;t <= n;t++){
+			printf("fd");
+			exit(1);
+		for(size_t t = 1;t <= n;t++)
 			if(IsValid(row,col,t,grid)){
-
 				grid[row][col] = t;
+				Recurse(row, col + 1, grid);
+				grid[row][col] = 0; // if you need to backtrack
 			}
-		}
-		}
 
+		}else{
 
 		Recurse(row, col + 1, grid);
-		Recurse(row + 1, col, grid);
-		Recurse(row, col - 1, grid);
-		Recurse(row - 1, col, grid);
+
+		}
 
 
 	}
-
-
 }
 int main(){
 
@@ -205,6 +208,6 @@ int main(){
 	};
 
 	Recurse(0,0,grid);
-	//init(grid);
+
 	return 0;
 }
