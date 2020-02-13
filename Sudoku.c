@@ -4,7 +4,9 @@
 
 const int n = 9;
 
-int IsValid(int row, int col, int target){
+
+
+int IsValid(int row, int col, int target,int grid[n][n]){
 
 	int aux_row_length = 0;
 	int aux_col_length = 0;
@@ -41,22 +43,17 @@ int IsValid(int row, int col, int target){
 		i = 3;
 		j = 0;
 
-
 	}
 	if(row >= 3 && row < 6 && col >= 3 && col < 6){
 
 		i = 3;
 		j = 3;
-		
-		
 
 	}
 	if(row >= 3 && row < 6 && col >= 6 && col < 9){
 
 		i = 3;
 		j = 6;
-		
-		
 
 	}
 	if(row >= 6 && col < 3){
@@ -75,14 +72,15 @@ int IsValid(int row, int col, int target){
 		j = 6;
 
 	}
+
 	aux_row_length = i + 3;
 	aux_col_length = j + 3;
-	for(i;i < aux_row_length;i++){
-		for(j;j < aux_col_length;j++){
 
-			if(grid[i][j] == target) return 0;
-		}
-	}
+	for(size_t _i = i;_i < aux_row_length;_i++)
+		for(size_t _j = j;_j < aux_col_length;_j++)
+			if(grid[_i][_j] == target)   return 0;
+
+
 
 	return 1;
 }
@@ -154,8 +152,24 @@ void init(int grid[n][n]){
 
 int main(){
 
-	int grid[n][n];
+	int grid[9][9] = {
+	0,0,0,8,0,0,0,0,0,
+	0,0,0,0,0,0,0,0,0,
+	0,0,0,0,0,0,0,0,0,
+	0,0,0,0,0,0,0,0,0,
+	2,0,0,7,9,0,0,0,0,
+	0,0,0,0,0,0,0,0,0,
+	0,0,0,0,0,0,0,0,0,
+	3,0,0,0,9,0,0,0,0,
+	6,0,0,0,0,0,0,0,0
 
-	init(grid);
+	};
+	if(IsValid(4,8,9,grid)){
+
+
+	printf("It's valid!\n");
+	}
+	else printf("Its not valid!\n");
+	//init(grid);
 	return 0;
 }
