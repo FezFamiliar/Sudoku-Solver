@@ -173,11 +173,10 @@ int Recurse(int row, int col, int grid[n][n]){
 	}
 	else{
 
-
 		for(size_t t = 1;t <= n;t++){
-			if(IsValid(row,col,t,grid) && IsEmpty(col,row,grid) && row >= 0 && row < n && col >= 0 && col < n){
+
+			if(row >= 0 && row < n && col >= 0 && col < n){
 				grid[row][col] = t;
-				printf("ff");
 				Recurse(row, col + 1, grid);
 				Recurse(row + 1, col, grid);
 				Recurse(row, col - 1, grid);
@@ -189,22 +188,56 @@ int Recurse(int row, int col, int grid[n][n]){
 
 	}
 }
+
+
+void Recurse_test(int i, int j, int grid[n][n], int check[n][n]){
+
+
+
+
+	if(i >=0 && i < n && j >= 0 && j < n && check[i][j] == 0){
+	
+		check[i][j] = 1;
+		if(IsEmpty(i,j,grid))
+			printf("%d ",grid[i][j]);
+		Recurse_test(i,j + 1,grid,check);
+		Recurse_test(i + 1,j,grid,check);
+		Recurse_test(i,j - 1,grid,check);
+		Recurse_test(i - 1,j,grid,check);
+
+	}
+
+}
 int main(){
 
-	int grid[9][9] = {
-	0,0,0,0,0,0,0,0,0,
-	0,0,0,0,0,0,0,0,0,
-	0,0,0,0,0,0,0,0,0,
-	0,0,0,0,0,0,0,0,0,
-	0,0,0,0,0,0,0,0,0,
-	0,0,0,0,0,0,0,0,0,
-	0,0,0,0,0,0,0,0,0,
-	0,0,0,0,0,0,0,0,0,
-	0,0,0,0,0,0,0,0,0
+	int test[9][9] = {
+	0,7,2,0,0,4,9,0,0,
+	3,0,4,0,8,9,1,0,0,
+	8,1,9,0,0,6,2,5,4,
+	7,0,1,0,0,0,0,9,5,
+	9,0,0,0,0,2,0,7,0,
+	0,0,0,8,0,7,0,1,1,
+	4,0,5,0,0,1,6,2,0,
+	2,3,7,0,0,0,5,0,1,
+	0,0,0,0,2,5,7,0,0
 
 	};
 
-	Recurse(0,0,grid);
 
+	int check[9][9] = {
+
+	0,0,0,0,0,0,0,0,0,
+	0,0,0,0,0,0,0,0,0,
+	0,0,0,0,0,0,0,0,0,
+        0,0,0,0,0,0,0,0,0,
+	0,0,0,0,0,0,0,0,0,
+        0,0,0,0,0,0,0,0,0,
+        0,0,0,0,0,0,0,0,0,
+        0,0,0,0,0,0,0,0,0,
+	0,0,0,0,0,0,0,0,0,
+
+	};
+	//Recurse(0,0,test);
+	Recurse_test(0,0,test,check);
 	return 0;
 }
