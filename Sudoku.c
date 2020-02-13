@@ -4,8 +4,6 @@
 
 const int n = 9;
 
-
-
 int IsValid(int row, int col, int target,int grid[n][n]){
 
 	int aux_row_length = 0;
@@ -156,11 +154,45 @@ void init(int grid[n][n]){
 	free(random_cask);
 }
 
+int IsFull(int grid[n][n]){
 
+	for(size_t i = 0;i < n;i++)
+		for(size_t j = 0;j < n;j++)
+			if(grid[i][j] == 0) return 0;
+
+
+	return 1;
+}
+
+void Recurse(int row, int col, int grid[n][n]){
+
+
+	if(row >= 0 && row < n && col >= 0 && col < n){
+
+		if(IsEmpty(row,col,grid)){
+			for(size_t t = 1;t <= n;t++){
+			if(IsValid(row,col,t,grid)){
+
+				grid[row][col] = t;
+			}
+		}
+		}
+
+
+		Recurse(row, col + 1, grid);
+		Recurse(row + 1, col, grid);
+		Recurse(row, col - 1, grid);
+		Recurse(row - 1, col, grid);
+
+
+	}
+
+
+}
 int main(){
 
 	int grid[9][9] = {
-	0,0,0,8,0,0,0,0,0,
+	0,0,0,8,1,1,1,1,1,
 	0,0,0,0,0,0,0,0,0,
 	0,0,0,0,0,0,0,0,0,
 	0,0,0,0,0,0,0,0,0,
@@ -171,12 +203,8 @@ int main(){
 	6,0,0,0,0,0,0,0,0
 
 	};
-	if(IsEmpty(4,0,grid)){
 
-
-	printf("It's empty!\n");
-	}
-	else printf("its not empty");
+	Recurse(0,0,grid);
 	//init(grid);
 	return 0;
 }
