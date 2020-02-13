@@ -4,12 +4,85 @@
 
 const int n = 9;
 
+int IsValid(int row, int col, int target){
+
+	int aux_row_length = 0;
+	int aux_col_length = 0;
+	size_t i, j;
+	for(size_t x = 0;x < n;x++) // check row
+		if(grid[row][x] == target) return 0;
+
+	for(size_t y = 0;y < n;y++) // check column
+		if(grid[y][col] == target) return 0;
+
+
+	//check box
+
+	if(row < 3 && col < 3){
+
+		i = 0;
+		j = 0;
+		aux_row_length = i + 3;
+		aux_row_length = j + 3;
+
+	}
+	if(row < 3 && col >= 3 && col < 6){
+
+ 		i = 0;
+		j = 3;
+		aux_row_length = i + 3;
+		aux_col_length = j + 3;
+
+	}
+	if(row < 3 && col >= 6 && col < 9){
+
+		i = 0;
+		j = 6;
+		aux_row_length = i + 3;
+		aux_col_length = j + 3;
+
+	}
+	if(row >= 3 && row < 6 && col < 3){
+
+		i = 3;
+		j = 0;
+		aux_row_length = i + 3;
+		aux_col_length = j + 3;
+
+	}
+	if(row >= 3 && row < 6 && col >= 3 && col < 6){
+
+		i = 3;
+		j = 3;
+		aux_row_length = i + 3;
+		aux_col_length = j + 3;
+
+	}
+	if(row >= 3 && row < 6 && col >= 6 && col < 9){
+
+		i = 3;
+		j = 6;
+		aux_row_length = i + 3;
+		aux_col_length = j + 3;
+
+	}
+
+
+	for(i;i < aux_row_length;i++){
+		for(j;j < aux_col_length;j++){
+
+			if(grid[i][j] == target) return 0;
+		}
+	}
+
+	return 1;
+}
 
 void print_grid(int grid[n][n]){
 
 	for(size_t i = 0;i < n;i++){
 		for(size_t j = 0;j < n;j++){
-	
+
 			printf(" %d ",grid[i][j]);
 			if(j == 2 || j == 5) printf("|");
 			}
