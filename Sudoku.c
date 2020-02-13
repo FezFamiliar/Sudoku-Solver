@@ -22,52 +22,61 @@ int IsValid(int row, int col, int target){
 
 		i = 0;
 		j = 0;
-		aux_row_length = i + 3;
-		aux_row_length = j + 3;
 
 	}
 	if(row < 3 && col >= 3 && col < 6){
 
  		i = 0;
 		j = 3;
-		aux_row_length = i + 3;
-		aux_col_length = j + 3;
 
 	}
 	if(row < 3 && col >= 6 && col < 9){
 
 		i = 0;
 		j = 6;
-		aux_row_length = i + 3;
-		aux_col_length = j + 3;
 
 	}
 	if(row >= 3 && row < 6 && col < 3){
 
 		i = 3;
 		j = 0;
-		aux_row_length = i + 3;
-		aux_col_length = j + 3;
+
 
 	}
 	if(row >= 3 && row < 6 && col >= 3 && col < 6){
 
 		i = 3;
 		j = 3;
-		aux_row_length = i + 3;
-		aux_col_length = j + 3;
+		
+		
 
 	}
 	if(row >= 3 && row < 6 && col >= 6 && col < 9){
 
 		i = 3;
 		j = 6;
-		aux_row_length = i + 3;
-		aux_col_length = j + 3;
+		
+		
 
 	}
+	if(row >= 6 && col < 3){
+		i = 6;
+		j = 0;
 
+	}
+	if(row >= 6 && col >= 3 && col < 6){
 
+		i = 6;
+		j = 3;
+	}
+	if(row >= 6 && col >= 6){
+
+		i = 6;
+		j = 6;
+
+	}
+	aux_row_length = i + 3;
+	aux_col_length = j + 3;
 	for(i;i < aux_row_length;i++){
 		for(j;j < aux_col_length;j++){
 
