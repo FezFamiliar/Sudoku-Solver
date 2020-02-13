@@ -85,6 +85,13 @@ int IsValid(int row, int col, int target,int grid[n][n]){
 	return 1;
 }
 
+int IsEmpty(int row, int col, int grid[n][n]){
+
+
+	return (grid[row][col] == 0) ? 1 : 0;
+
+}
+
 void print_grid(int grid[n][n]){
 
 	for(size_t i = 0;i < n;i++){
@@ -164,12 +171,12 @@ int main(){
 	6,0,0,0,0,0,0,0,0
 
 	};
-	if(IsValid(4,8,9,grid)){
+	if(IsEmpty(4,0,grid)){
 
 
-	printf("It's valid!\n");
+	printf("It's empty!\n");
 	}
-	else printf("Its not valid!\n");
+	else printf("its not empty");
 	//init(grid);
 	return 0;
 }
