@@ -7,17 +7,22 @@ const int n = 9;
 int IsEmpty(int row, int col, int grid[n][n]);
 int IsValid(int i, int j, int target, int grid[n][n]);
 int IsFull(int grid[n][n]);
-
 int Recurse(int row, int col, int grid[n][n]){
 
-	if(IsFull(grid)) return 1;
+
+	if(IsFull(grid)){
+	printf("im in full");
+	return 1;
+	} 
 
 	for(int t = 1;t <= n;t++){
-
+		printf("%d\n",t);
 		if(IsValid(row,col,t,grid) && IsEmpty(row,col,grid)){
-
 			grid[row][col] = t;
-			if(Recurse(row,col,grid)) return 1;
+			if(Recurse(row,col,grid)){
+			printf("jjj");
+			return 1;
+			} 
 			grid[row][col] = 0;
 		}
 
@@ -197,15 +202,15 @@ int IsFull(int grid[n][n]){
 int main(){
 
 	int test[9][9] = {
-	0,7,2,0,0,4,9,0,0,
-	3,0,4,0,8,9,1,0,0,
-	8,1,9,0,0,6,2,5,4,
-	7,0,1,0,0,0,0,9,5,
-	9,0,0,0,0,2,0,7,0,
-	0,0,0,8,0,7,0,1,0,
-	4,0,5,0,0,1,6,2,0,
-	2,3,7,0,0,0,5,0,1,
-	0,0,0,0,2,5,7,0,0
+	{0,0,2,0,0,4,9,0,0},
+	{3,0,4,0,8,9,1,0,0},
+	{8,1,9,0,0,6,2,5,4},
+	{7,0,1,0,0,0,0,9,5},
+	{9,0,0,0,0,2,0,7,0},
+	{0,0,0,8,0,7,0,1,0},
+	{4,0,5,0,0,1,6,2,0},
+	{2,3,7,0,0,0,5,0,1},
+	{0,0,0,0,2,5,7,0,0}
 
 	};
 
