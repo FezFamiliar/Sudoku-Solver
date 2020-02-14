@@ -10,26 +10,19 @@ int IsFull(int grid[n][n]);
 
 int Recurse(int row, int col, int grid[n][n]){
 
-
 	if(IsFull(grid)) return 1;
 
-	else if(row >= 0 && row < n && col >= 0 && col < n){
+	for(int t = 1;t <= n;t++){
 
-		if(IsEmpty(row,col,grid)){
-			for(size_t t = 1;t <= n;t++){
-				if(IsValid(row,col,t,grid)){
-					grid[row][col] = t;
-				}
-			}
-		}
-		Recurse(row, col + 1, grid);
-		Recurse(row + 1, col, grid);
-		Recurse(row, col - 1, grid);
-		Recurse(row - 1, col, grid);
+		if(IsValid(row,col,t,grid) && IsEmpty(row,col,grid)){
 
+			grid[row][col] = t;
+			if(Recurse(row,col,grid)) return 1;
+			grid[row][col] = 0;
 		}
 
-
+	}
+	return 0;
 }
 
 
@@ -216,20 +209,6 @@ int main(){
 
 	};
 
-
-	int check[9][9] = {
-
-	0,0,0,0,0,0,0,0,0,
-	0,0,0,0,0,0,0,0,0,
-	0,0,0,0,0,0,0,0,0,
-        0,0,0,0,0,0,0,0,0,
-	0,0,0,0,0,0,0,0,0,
-        0,0,0,0,0,0,0,0,0,
-        0,0,0,0,0,0,0,0,0,
-        0,0,0,0,0,0,0,0,0,
-	0,0,0,0,0,0,0,0,0,
-
-	};
 	print_grid(test);
 	Recurse(0,0,test);
 	print_grid(test);
