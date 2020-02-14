@@ -164,62 +164,25 @@ int IsFull(int grid[n][n]){
 	return 1;
 }
 
-int Recurse(int row, int col, int grid[n][n]){
+int Recurse(int row, int col, int grid[n][n], int check[n][n]){
 
 
-	if(IsFull(grid)) {
-		print_grid(grid);
-		exit(1);
-	}
-	else{
+	if(IsFull(grid)) return 1;
 
-		for(size_t t = 1;t <= n;t++){
+			else if(row >= 0 && row < n && col >= 0 && col < n && check[row][col] == 0){
+				check[i][j] = 1;
+				printf("%d ",grid[row][col]);
+				Recurse(row, col + 1, grid,check);
+				Recurse(row + 1, col, grid,check);
+				Recurse(row, col - 1, grid,check);
+				Recurse(row - 1, col, grid,check);
 
-			if(row >= 0 && row < n && col >= 0 && col < n){
-				grid[row][col] = t;
-				Recurse(row, col + 1, grid);
-				Recurse(row + 1, col, grid);
-				Recurse(row, col - 1, grid);
-				Recurse(row - 1, col, grid);
-				grid[row][col] = 0; // if you need to backtrack
 			}
-		}
 
 
-	}
 }
 
 
-void Recurse_test(int i, int j, int grid[n][n]){
-
-
-	if(IsFull(grid)){
-
-		print_grid(grid);
-		exit(1);
-	}
-
-	if(i >=0 && i < n && j >= 0 && j < n){
-
-		if(IsEmpty(i,j,grid)){
-			for(size_t t = 1;t <= n;t++){
-
-				if(IsValid(i,j,t,grid)){
-				grid[i][j] = t;
-				break;
-				} 
-			}
-		}
-
-		Recurse_test(i,j + 1,grid);
-		Recurse_test(i + 1,j,grid);
-		Recurse_test(i,j - 1,grid);
-		Recurse_test(i - 1,j,grid);
-
-	}
-
-
-}
 int main(){
 
 	int test[9][9] = {
@@ -249,8 +212,7 @@ int main(){
 	0,0,0,0,0,0,0,0,0,
 
 	};
-	//Recurse(0,0,test);
-	Recurse_test(0,0,test);
-	//print_grid(test);
+
+	Recurse(0,0,test,check);
 	return 0;
 }
