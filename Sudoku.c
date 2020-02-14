@@ -4,6 +4,45 @@
 
 const int n = 9;
 
+int IsEmpty(int row, int col, int grid[n][n]);
+int IsValid(int i, int j, int target, int grid[n][n]);
+int IsFull(int grid[n][n]);
+
+int Recurse(int row, int col, int grid[n][n]){
+
+
+	if(IsFull(grid)) return 1;
+
+	else if(row >= 0 && row < n && col >= 0 && col < n){
+
+		if(IsEmpty(row,col,grid)){
+			for(size_t t = 1;t <= n;t++){
+				if(IsValid(row,col,t,grid)){
+					grid[row][col] = t;
+				}
+			}
+		}
+		Recurse(row, col + 1, grid);
+		Recurse(row + 1, col, grid);
+		Recurse(row, col - 1, grid);
+		Recurse(row - 1, col, grid);
+
+		}
+
+
+}
+
+
+
+
+int IsEmpty(int row, int col, int grid[n][n]){
+
+
+	return (grid[row][col] == 0) ? 1 : 0;
+
+}
+
+
 int IsValid(int row, int col, int target,int grid[n][n]){
 
 	int aux_row_length = 0;
@@ -83,12 +122,8 @@ int IsValid(int row, int col, int target,int grid[n][n]){
 	return 1;
 }
 
-int IsEmpty(int row, int col, int grid[n][n]){
 
 
-	return (grid[row][col] == 0) ? 1 : 0;
-
-}
 
 void print_grid(int grid[n][n]){
 
@@ -103,6 +138,8 @@ void print_grid(int grid[n][n]){
 		printf("\n");
 		if(i == 2 || i == 5) printf("----------------------------\n");
 	}
+
+	printf("\n");
 }
 void Shuffle(int* random_cask){
 
@@ -164,25 +201,6 @@ int IsFull(int grid[n][n]){
 	return 1;
 }
 
-int Recurse(int row, int col, int grid[n][n], int check[n][n]){
-
-
-	if(IsFull(grid)) return 1;
-
-			else if(row >= 0 && row < n && col >= 0 && col < n && check[row][col] == 0){
-				check[i][j] = 1;
-				printf("%d ",grid[row][col]);
-				Recurse(row, col + 1, grid,check);
-				Recurse(row + 1, col, grid,check);
-				Recurse(row, col - 1, grid,check);
-				Recurse(row - 1, col, grid,check);
-
-			}
-
-
-}
-
-
 int main(){
 
 	int test[9][9] = {
@@ -191,7 +209,7 @@ int main(){
 	8,1,9,0,0,6,2,5,4,
 	7,0,1,0,0,0,0,9,5,
 	9,0,0,0,0,2,0,7,0,
-	0,0,0,8,0,7,0,1,1,
+	0,0,0,8,0,7,0,1,0,
 	4,0,5,0,0,1,6,2,0,
 	2,3,7,0,0,0,5,0,1,
 	0,0,0,0,2,5,7,0,0
@@ -212,7 +230,8 @@ int main(){
 	0,0,0,0,0,0,0,0,0,
 
 	};
-
-	Recurse(0,0,test,check);
+	print_grid(test);
+	Recurse(0,0,test);
+	print_grid(test);
 	return 0;
 }
