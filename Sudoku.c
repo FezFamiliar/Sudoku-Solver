@@ -6,23 +6,22 @@ const int n = 9;
 
 int IsEmpty(int row, int col, int grid[n][n]);
 int IsValid(int i, int j, int target, int grid[n][n]);
-int IsFull(int grid[n][n]);
-int Recurse(int row, int col, int grid[n][n]){
+int IsFull(int grid[n][n], int& i, int& j);
 
+int Recurse(int grid[n][n]){
 
-	if(IsFull(grid)){
-	printf("im in full");
+	int row = 0;
+	int col = 0;
+	if(IsFull(grid,row,col)){
 	return 1;
-	} 
+	}
 
 	for(int t = 1;t <= n;t++){
-		printf("%d\n",t);
 		if(IsValid(row,col,t,grid) && IsEmpty(row,col,grid)){
 			grid[row][col] = t;
-			if(Recurse(row,col,grid)){
-			printf("jjj");
+			if(Recurse(grid)){
 			return 1;
-			} 
+			}
 			grid[row][col] = 0;
 		}
 
@@ -189,10 +188,10 @@ void init(int grid[n][n]){
 	free(random_cask);
 }
 
-int IsFull(int grid[n][n]){
+int IsFull(int grid[n][n], int& i, int& j){
 
-	for(size_t i = 0;i < n;i++)
-		for(size_t j = 0;j < n;j++)
+	for(i = 0;i < n;i++)
+		for(j = 0;j < n;j++)
 			if(grid[i][j] == 0) return 0;
 
 
@@ -201,7 +200,7 @@ int IsFull(int grid[n][n]){
 
 int main(){
 
-	int test[9][9] = {
+	int grid[9][9] = {
 	{0,0,2,0,0,4,9,0,0},
 	{3,0,4,0,8,9,1,0,0},
 	{8,1,9,0,0,6,2,5,4},
@@ -214,8 +213,8 @@ int main(){
 
 	};
 
-	print_grid(test);
-	Recurse(0,0,test);
-	print_grid(test);
+	print_grid(grid);
+	Recurse(grid);
+	print_grid(grid);
 	return 0;
 }
