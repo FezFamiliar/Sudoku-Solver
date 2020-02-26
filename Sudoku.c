@@ -12,16 +12,13 @@ int Recurse(int grid[n][n]){
 
 	int row = 0;
 	int col = 0;
-	if(IsFull(grid,row,col)){
-	return 1;
-	}
+	if(IsFull(grid,row,col)) return 1;
+	
 
 	for(int t = 1;t <= n;t++){
 		if(IsValid(row,col,t,grid) && IsEmpty(row,col,grid)){
 			grid[row][col] = t;
-			if(Recurse(grid)){
-			return 1;
-			}
+			if(Recurse(grid)) return 1;
 			grid[row][col] = 0;
 		}
 
